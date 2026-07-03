@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Registration Form</title>
+    </head>
+    
+    <!-- Background color Baby Pink (#FFC0CB) rakha hai -->
+    <body style="background-color: #932d3e; color: black; font-family: Arial, sans-serif;">
+        
+        <center>
+            <h1 style="color: #d11a6a;">REGISTRATION FORM</h1>
+            <p style="color: #2c52b4;">Submit this form for online Registration</p>
+        </center>
+
+        <!-- Form container jisme white background hai -->
+        <center>
+        <div style="background-color: white; width: 60%; padding: 30px; text-align: left; border-radius: 10px; border: 2px solid #ff99cc;">
+            
+            <form action="submitform()">
+                
+                <p>
+                    <label><b>Name:</b></label><br>
+                    <input type="text" placeholder="Enter your name" required style="width: 90%; padding: 8px;">
+                </p>
+
+                <p>
+                    <label><b>Email:</b></label><br>
+                    <input type="email" placeholder="Enter your email" required style="width: 90%; padding: 8px;">
+                </p>
+
+                <p>
+                    <label><b>Phone:</b></label><br>
+                    <input type="text" placeholder="Enter phone number" required style="width: 90%; padding: 8px;">
+                </p>
+
+                <p>
+                    <label><b>Gender:</b></label><br>
+                    <input type="radio" name="gender" id="male" checked> 
+                    <label for="male">Male</label>
+                    
+                    <input type="radio" name="gender" id="female"> 
+                    <label for="female">Female</label>
+
+                    <input type="radio" name="gender" id="check-prefer"> 
+                    <label for="check-prefer">Prefer not to say</label>
+                </p>
+
+                <p>
+                    <label><b>DOB:</b></label><br>
+                    <input type="date" required style="width: 90%; padding: 8px;">
+                </p>
+
+                <p>
+                    <label><b>Department:</b></label><br>
+                    <input type="text" placeholder="Enter your department" required style="width: 90%; padding: 8px;">
+                </p>
+
+                <!-- Address Section (Nayi add ki hui details) -->
+                <p>
+                    <label><b>Address:</b></label><br>
+                    <input type="text" placeholder="Enter street address" required style="width: 90%; padding: 8px; margin-bottom: 10px;"><br>
+                    
+                    <input type="text" placeholder="Enter street address line 2" style="width: 90%; padding: 8px; margin-bottom: 10px;"><br>
+                    
+                    <input type="text" placeholder="Country" required style="width: 43%; padding: 8px;">
+                    <input type="text" placeholder="Enter your city" required style="width: 43%; padding: 8px; margin-left: 2%;"><br><br>
+                    
+                    <input type="text" placeholder="Enter your region" required style="width: 43%; padding: 8px;">
+                    <input type="text" placeholder="Enter postal code" required style="width: 43%; padding: 8px; margin-left: 2%;">
+                </p>
+
+                <!-- Password fields -->
+                <p>
+                    <label><b>Password:</b></label><br>
+                    <input type="password" placeholder="Enter password" required style="width: 90%; padding: 8px;">
+                </p>
+
+                <p>
+                    <label><b>Confirm Password:</b></label><br>
+                    <input type="password" placeholder="Confirm your password" required style="width: 90%; padding: 8px;">
+                </p>
+
+                <br>
+                <center>
+                    <!-- Submit aur Clear buttons -->
+                    <input type="submit" value="Submit" style="background-color: #ff66b3; color: white; padding: 10px 30px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">
+                    
+                    <input type="button" value="Clear" style="padding: 10px 30px; margin-left: 10px; border-radius: 5px;">
+                </center>
+
+            </form>
+            
+        </div>
+        </center>
+
+    </body>
+</html>
