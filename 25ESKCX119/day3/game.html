@@ -1,15 +1,95 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>GAME PAGE</title>
-    </head>
-    <body><center>
-        <h1>HELLO START GAME BY HERE</h1>
-        <button type="button" id="Start">Start game </button><br><br>
-        
-        <img src="apple.jpg" alt="APPLE PIC">
-        <img src="banana.jpg" alt="BANANA PIC">
-        
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple & Banana Game</title>
+</head>
+
+<body id="game-body" style="background-color: #fce4ec; color: black; font-family: Arial, sans-serif; transition: 0.5s;">
+    
+    <center>
+        <h1 id="title" style="color: #d11a6a;">APPLE OR BANANA CLICKER GAME</h1>
+        <p id="subtitle" style="color: #2c52b4; font-size: 18px;">Click the correct fruit before the time runs out!</p>
+
+        <div id="stats" style="background-color: white; width: 50%; padding: 15px; border-radius: 10px; border: 2px solid #ff99cc; margin-bottom: 20px;">
+            <h3 style="margin: 5px;">Time Left: <span id="time" style="color: red;">60</span> seconds</h3>
+            <h3 style="margin: 5px;">Score: <span id="score" style="color: green;">0</span></h3>
+        </div>
+
+        <button id="start-btn" onclick="startGame()" style="background-color: #ff66b3; color: white; padding: 15px 40px; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer;">
+            START GAME
+        </button>
+
+        <div id="game-area" style="display: none; margin-top: 30px;">
+            <div id="fruit-display" onclick="checkClick()" style="font-size: 120px; cursor: pointer; user-select: none;">
+                🍎
+            </div>
+            <p style="font-weight: bold;">Tap or Click the fruit fast!</p>
+        </div>
+
+        <div id="game-over" style="display: none; margin-top: 50px;">
+            <h1 style="color: red; font-size: 50px;">GAME OVER!</h1>
+            <h2 style="color: white;">Your Final Score: <span id="final-score">0</span></h2>
+            <button onclick="location.reload()" style="background-color: white; color: black; padding: 10px 30px; border-radius: 5px; font-weight: bold; cursor: pointer;">Play Again</button>
+        </div>
     </center>
-    </body>
+
+    <script>
+        let score = 0;
+        let timeLeft = 60; // Yahan 1 minute = 60 seconds kar diya hai
+        let currentFruit = "apple";
+        let timerId;
+
+        function startGame() {
+            document.getElementById("start-btn").style.display = "none";
+            document.getElementById("game-area").style.display = "block";
+            
+            showNextFruit();
+
+            timerId = setInterval(function() {
+                timeLeft = timeLeft - 1;
+                document.getElementById("time").innerText = timeLeft;
+
+                if (timeLeft <= 0) {
+                    gameOver();
+                }
+            }, 1000);
+        }
+
+        function showNextFruit() {
+            let randomNumber = Math.random();
+            let fruitBox = document.getElementById("fruit-display");
+
+            if (randomNumber > 0.5) {
+                currentFruit = "apple";
+                fruitBox.innerText = "🍎";
+            } else {
+                currentFruit = "banana";
+                fruitBox.innerText = "🍌";
+            }
+        }
+
+        function checkClick() {
+            score = score + 1;
+            document.getElementById("score").innerText = score;
+            showNextFruit();
+        }
+
+        function gameOver() {
+            clearInterval(timerId);
+
+            // Screen ko black karna
+            document.getElementById("game-body").style.backgroundColor = "black";
+            
+            document.getElementById("title").style.display = "none";
+            document.getElementById("subtitle").style.display = "none";
+            document.getElementById("stats").style.display = "none";
+            document.getElementById("game-area").style.display = "none";
+
+            document.getElementById("final-score").innerText = score;
+            document.getElementById("game-over").style.display = "block";
+        }
+    </script>
+</body>
 </html>
