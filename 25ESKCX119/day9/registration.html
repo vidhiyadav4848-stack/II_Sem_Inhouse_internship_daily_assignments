@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Registration Form</h2>
+    <form action="registration.php" method="POST" class="form" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter full name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="Enter email address" required>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group half-width">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter phone number">
+            </div>
+            <div class="form-group half-width">
+                <label for="dob">Birth Date</label>
+                <input type="date" id="dob" name="dob">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="branch">Branch</label>
+            <select id="branch" name="branch">
+                <option value="">Select Branch</option>
+                <option value="cs">Computer Science</option>
+                <option value="it">Information Technology</option>
+                <option value="me">Mechanical Engineering</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="myfile">Upload File (Image/PDF)</label>
+            <input type="file" id="myfile" name="myfile" accept="image/*,application/pdf">
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>
