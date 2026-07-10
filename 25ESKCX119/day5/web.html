@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pravah 2026 | SKIT Jaipur</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Bungee&family=Poppins:wght@300;400;600&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0B032D;
+            --indigo-night: #1a0b40;
+            --hot-pink: #FF007F;
+            --marigold: #FFC300;
+            --teal: #00E5FF;
+            --orange: #FF6B00;
+            --text-light: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--hot-pink); border-radius: 4px; }
+
+        /* Typography */
+        h1, h2, .bungee { font-family: 'Bungee', cursive; }
+        .baloo { font-family: 'Baloo 2', cursive; }
+        .mono { font-family: 'Space Mono', monospace; }
+
+        /* --- Navbar --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(11, 3, 45, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--teal);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: white;
+            text-shadow: 2px 2px var(--hot-pink), -2px -2px var(--teal);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--marigold);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- Hero Section --- */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            background: radial-gradient(circle at center, var(--indigo-night) 0%, var(--bg) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .hero-content {
+            z-index: 2;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .marquee-container {
+            border: 6px dashed var(--marigold);
+            padding: 3rem;
+            border-radius: 20px;
+            animation: marqueeLights 0.8s infinite alternate;
+            background: rgba(0, 0, 0, 0.4);
+            max-width: 900px;
+            width: 100%;
+            backdrop-filter: blur(5px);
+        }
+
+        @keyframes marqueeLights {
+            0% { border-color: var(--marigold); box-shadow: 0 0 15px var(--marigold), inset 0 0 15px var(--marigold); }
+            100% { border-color: var(--teal); box-shadow: 0 0 25px var(--teal), inset 0 0 25px var(--teal); }
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 4px 4px var(--hot-pink), -4px -4px var(--teal);
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 2rem;
+            color: var(--marigold);
+            margin-bottom: 0.5rem;
+        }
+
+        .college-name {
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+            color: var(--teal);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        /* --- Countdown --- */
+        .countdown {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .time-box {
+            background: rgba(255, 107, 0, 0.2);
+            border: 2px solid var(--orange);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(255, 107, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 100px;
+            backdrop-filter: blur(5px);
+        }
+
+        .time-box span:first-child {
+            font-size: 2.5rem;
+            color: var(--marigold);
+            text-shadow: 0 0 10px var(--marigold);
+        }
+
+        .time-box span:last-child {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-top: 5px;
+            letter-spacing: 1px;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--hot-pink);
+            color: white;
+            border: 2px solid var(--hot-pink);
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--teal);
+            border: 2px solid var(--teal);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--hot-pink);
+            box-shadow: 0 0 30px rgba(255, 0, 127, 0.8);
+        }
+
+        .btn-secondary:hover {
+            background: var(--teal);
+            color: var(--bg);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+        }
+
+        /* Scroll Indicator */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: var(--teal);
+            font-size: 2rem;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+
+        /* --- Common Section Styles --- */
+        section {
+            padding: 6rem 5%;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3.5rem;
+            color: var(--teal);
+            text-shadow: 3px 3px var(--hot-pink);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+        
+        .section-subtitle {
+             text-align: center;
+             color: var(--marigold);
+             font-size: 1.2rem;
+             margin-bottom: 4rem;
+             font-family: 'Space Mono', monospace;
+        }
+
+        /* --- About Section --- */
+        .about-section {
+            background: var(--indigo-night);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--teal);
+            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2);
+        }
+
+        .about-icon {
+            font-size: 3rem;
+            color: var(--hot-pink);
+            margin-bottom: 1rem;
+        }
+
+        .about-card h3 {
+            color: var(--marigold);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* --- Statistics Section --- */
+        .stats-section {
+            background: linear-gradient(45deg, var(--bg), var(--indigo-night));
+            border-top: 2px dashed var(--orange);
+            border-bottom: 2px dashed var(--orange);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 4rem;
+            color: var(--teal);
+            text-shadow: 0 0 15px var(--teal);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 1.2rem;
+            color: var(--marigold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- Event Categories --- */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .event-card {
+            background: var(--bg);
+            border: 2px solid var(--teal);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+            background: linear-gradient(90deg, var(--hot-pink), var(--marigold));
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 229, 255, 0.3);
+        }
+
+        .event-img {
+            width: 100%;
+            height: 200px;
+            background: var(--indigo-night);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+            color: rgba(255,255,255,0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .event-content {
+            padding: 2rem;
+        }
+
+        .event-content h3 {
+            font-size: 1.5rem;
+            color: var(--marigold);
+            margin-bottom: 1rem;
+        }
+
+        .event-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: rgba(255, 0, 127, 0.2);
+            color: var(--hot-pink);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* --- Gallery Section --- */
+        .gallery-section {
+            background: var(--bg);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+            border: 3px solid;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            cursor: pointer;
+        }
+
+        /* Carnival Alternating Borders */
+        .gallery-item:nth-child(1) { border-color: var(--teal); }
+        .gallery-item:nth-child(2) { border-color: var(--marigold); }
+        .gallery-item:nth-child(3) { border-color: var(--hot-pink); }
+        .gallery-item:nth-child(4) { border-color: var(--orange); }
+        .gallery-item:nth-child(5) { border-color: var(--teal); }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(11, 3, 45, 0.95), transparent);
+            padding: 2rem 1rem 1rem;
+            color: white;
+            transition: bottom 0.4s ease-in-out;
+            text-align: center;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            bottom: 0;
+        }
+
+        .gallery-overlay h3 {
+            color: var(--marigold);
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px var(--hot-pink);
+        }
+
+        .gallery-overlay p {
+            color: #ddd;
+            font-size: 0.9rem;
+        }
+
+        /* --- Registration Form --- */
+        .registration-section {
+            background: var(--indigo-night);
+        }
+
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 195, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--teal);
+            font-family: 'Space Mono', monospace;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--hot-pink);
+            box-shadow: 0 0 10px rgba(255, 0, 127, 0.3);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, var(--hot-pink), var(--orange));
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-family: 'Bungee', cursive;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 107, 0, 0.5);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--teal);
+            color: var(--bg);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast.show { bottom: 30px; }
+
+        /* --- Footer --- */
+        footer {
+            background: #050117;
+            padding: 4rem 5% 2rem;
+            border-top: 3px solid var(--hot-pink);
+            text-align: center;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            text-align: left;
+        }
+
+        .footer-col h4 {
+            color: var(--teal);
+            font-family: 'Bungee', cursive;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover { color: var(--marigold); }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-start;
+        }
+
+        .social-icons a {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex; justify-content: center; align-items: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--hot-pink);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Particles canvas */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0; left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 100%; left: 0; width: 100%;
+                background: var(--bg);
+                flex-direction: column;
+                padding: 2rem;
+                text-align: center;
+                border-bottom: 2px solid var(--teal);
+                display: none;
+            }
+            .nav-links.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .marquee-container { padding: 1.5rem; border-width: 4px; }
+            h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Navbar -->
+    <nav id="navbar">
+        <a href="#" class="logo bungee">
+            <i class="fa-solid fa-tent" style="color: var(--marigold);"></i> PRAVAH
+        </a>
+        <ul class="nav-links mono" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#register">Register</a></li>
+        </ul>
+        <div class="mobile-menu-btn" id="menuBtn">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home">
+        <div class="hero-content" data-aos="zoom-in" data-aos-duration="1000">
+            <div class="marquee-container">
+                <h2 class="subtitle baloo">The Greatest Show of Ideas</h2>
+                <h1 class="bungee">PRAVAH 2026</h1>
+                <p class="college-name mono">SKIT JAIPUR</p>
+                
+                <div class="countdown mono" id="countdown">
+                    <div class="time-box">
+                        <span id="days">00</span><span>Days</span>
+                    </div>
+                    <div class="time-box">
+                        <span id="hours">00</span><span>Hours</span>
+                    </div>
+                    <div class="time-box">
+                        <span id="minutes">00</span><span>Mins</span>
+                    </div>
+                    <div class="time-box">
+                        <span id="seconds">00</span><span>Secs</span>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <a href="#register" class="btn-primary bungee">
+                        <i class="fa-solid fa-ticket"></i> Register Now
+                    </a>
+                    <a href="#events" class="btn-secondary bungee">
+                        <i class="fa-regular fa-compass"></i> Explore
+                    </a>
+                </div>
+            </div>
+        </div>
+        <a href="#about" class="scroll-down"><i class="fa-solid fa-angles-down"></i></a>
+    </header>
+
+    <!-- Statistics Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="0">
+                <h3 class="bungee" data-target="5000">0</h3>
+                <p class="mono">Students</p>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="bungee" data-target="100">0</h3>
+                <p class="mono">Events</p>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                <h3 class="bungee" data-target="30">0</h3>
+                <p class="mono">Sponsors</p>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                <h3 class="bungee" data-target="3">0</h3>
+                <p class="mono">Days</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <h2 class="section-title bungee" data-aos="fade-up">About Pravah</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Where Innovation Meets Creativity</p>
+        
+        <div class="about-grid">
+            <div class="about-card" data-aos="fade-up" data-aos-delay="0">
+                <i class="fa-solid fa-eye about-icon"></i>
+                <h3 class="baloo">Our Vision</h3>
+                <p>To foster a culture of technical excellence and cultural vibrancy, providing a platform for students to showcase their multifaceted talents.</p>
+            </div>
+            <div class="about-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fa-solid fa-rocket about-icon" style="color: var(--teal);"></i>
+                <h3 class="baloo">The Carnival</h3>
+                <p>Three days under the big top of technology and ambition. Hackathons, live gigs, robotics, and more — all in one spectacular carnival.</p>
+            </div>
+            <div class="about-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fa-solid fa-building-columns about-icon" style="color: var(--marigold);"></i>
+                <h3 class="baloo">SKIT Jaipur</h3>
+                <p>Hosted at the premier engineering institute of Rajasthan, dedicated to nurturing the next generation of innovators and leaders.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Categories -->
+    <section id="events">
+        <h2 class="section-title bungee" data-aos="fade-up">Carnival Attractions</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Choose Your Arena</p>
+
+        <div class="events-grid">
+            <div class="event-card" data-aos="zoom-in" data-aos-delay="0">
+                <div class="event-img">
+                    <i class="fa-solid fa-laptop-code"></i>
+                </div>
+                <div class="event-content">
+                    <h3 class="bungee">Technical Events</h3>
+                    <p>Push the boundaries of innovation with coding challenges and hackathons.</p>
+                    <div class="event-tags">
+                        <span class="tag">AI Challenge</span>
+                        <span class="tag">Hackathon</span>
+                        <span class="tag">Robotics</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="event-img" style="color: rgba(255, 195, 0, 0.2);">
+                    <i class="fa-solid fa-gamepad"></i>
+                </div>
+                <div class="event-content">
+                    <h3 class="bungee" style="color: var(--teal);">E-Sports / Gaming</h3>
+                    <p>Battle it out in the ultimate gaming arenas. Featuring BGMI & Valorant.</p>
+                    <div class="event-tags">
+                        <span class="tag" style="background: rgba(0, 229, 255, 0.2); color: var(--teal);">BGMI</span>
+                        <span class="tag" style="background: rgba(0, 229, 255, 0.2); color: var(--teal);">FIFA</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="event-img" style="color: rgba(255, 0, 127, 0.2);">
+                    <i class="fa-solid fa-masks-theater"></i>
+                </div>
+                <div class="event-content">
+                    <h3 class="bungee" style="color: var(--hot-pink);">Cultural Night</h3>
+                    <p>Experience the magic of art, dance, music, and ethnic fashion walks.</p>
+                    <div class="event-tags">
+                        <span class="tag" style="background: rgba(255, 195, 0, 0.2); color: var(--marigold);">Dance Off</span>
+                        <span class="tag" style="background: rgba(255, 195, 0, 0.2); color: var(--marigold);">Fashion</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW GALLERY SECTION WITH USER IMAGES -->
+    <section id="gallery" class="gallery-section">
+        <h2 class="section-title bungee" data-aos="fade-up">Event Highlights</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Memories from the Carnival</p>
+
+        <div class="gallery-grid">
+            
+            <!-- Image 1: Gaming (game.png) -->
+            <div class="gallery-item" data-aos="zoom-in" data-aos-delay="0">
+                <img src="game.png" alt="E-Sports Tournament">
+                <div class="gallery-overlay">
+                    <h3 class="bungee">E-Sports Arena</h3>
+                    <p class="mono">BGMI Tournament</p>
+                </div>
+            </div>
+
+            <!-- Image 2: DJ Night (dj.png) -->
+            <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+                <img src="dj.png" alt="DJ Night">
+                <div class="gallery-overlay">
+                    <h3 class="bungee">DJ Night</h3>
+                    <p class="mono">Feel the Beats</p>
+                </div>
+            </div>
+
+            <!-- Image 3: Concert (concert.png) -->
+            <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+                <img src="concert.png" alt="Live Concert">
+                <div class="gallery-overlay">
+                    <h3 class="bungee">Star Night</h3>
+                    <p class="mono">Live Performances</p>
+                </div>
+            </div>
+
+            <!-- Image 4: Food (food.png) -->
+            <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+                <img src="food stal.png" alt="Food Carnival">
+                <div class="gallery-overlay">
+                    <h3 class="bungee">Food Fest</h3>
+                    <p class="mono">Taste the Thrill</p>
+                </div>
+            </div>
+
+            <!-- Image 5: Outdoor / Tug of War (outdoor.png) -->
+            <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
+                <img src="outdoor.png" alt="Outdoor Sports">
+                <div class="gallery-overlay">
+                    <h3 class="bungee">Carnival Games</h3>
+                    <p class="mono">Tug of War & More</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="register" class="registration-section">
+        <h2 class="section-title bungee" data-aos="fade-up">Get Your Pass</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Join the Greatest Show</p>
+        
+        <div class="form-container" data-aos="flip-up" data-aos-duration="1000">
+            <form id="pravahForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" class="form-control" required placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" class="form-control" required placeholder="college.id@skit.ac.in">
+                </div>
+                <div class="form-group">
+                    <label>College / Branch</label>
+                    <input type="text" class="form-control" required placeholder="SKIT / CS 2nd Year">
+                </div>
+                <div class="form-group">
+                    <label>Event Interest</label>
+                    <select class="form-control" required>
+                        <option value="" disabled selected>Select an option...</option>
+                        <option>Technical (Hackathon/AI)</option>
+                        <option>Cultural (Dance/Music)</option>
+                        <option>Gaming (BGMI/Valorant)</option>
+                        <option>All-Access Pass</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">SUBMIT & GET TICKET <i class="fa-solid fa-paper-plane ms-2"></i></button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4 class="logo bungee" style="font-size: 1.5rem;"><i class="fa-solid fa-tent" style="color: var(--marigold);"></i> PRAVAH</h4>
+                <p style="color: #aaa; margin-top: 1rem; font-size: 0.9rem;">The annual techno-cultural festival of SKIT Jaipur. Join us for a carnival of innovation, art, and excitement.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links mono">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#events">Events & Schedule</a></li>
+                    <li><a href="#register">Register</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul class="footer-links mono">
+                    <li><i class="fa-solid fa-location-dot" style="color: var(--hot-pink);"></i> SKIT Campus, Ramnagaria, Jaipur</li>
+                    <li><i class="fa-solid fa-envelope" style="color: var(--teal);"></i> pravah@skit.ac.in</li>
+                    <li><i class="fa-solid fa-phone" style="color: var(--marigold);"></i> +91 98765 43210</li>
+                </ul>
+                <div class="social-icons" style="margin-top: 1.5rem;">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright mono">
+            &copy; 2026 Pravah Carnival Team. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast mono" id="toastMsg">
+        <i class="fa-solid fa-circle-check"></i> Ticket Booked Successfully! See you at the Carnival. 🎡
+    </div>
+
+    <!-- Scripts -->
+    <!-- AOS Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Particles JS -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <script>
+        // Initialize AOS animations
+        AOS.init({
+            once: true,
+            offset: 50,
+        });
+
+        // Initialize Particles
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": ["#FF007F", "#FFC300", "#00E5FF"] },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": true },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
+                "move": { "enable": true, "speed": 2, "direction": "none", "random": true, "out_mode": "out" }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" },
+                    "onclick": { "enable": true, "mode": "push" }
+                },
+                "modes": {
+                    "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.style.padding = '0.5rem 5%';
+                nav.style.background = 'rgba(11, 3, 45, 0.95)';
+            } else {
+                nav.style.padding = '1rem 5%';
+                nav.style.background = 'rgba(11, 3, 45, 0.85)';
+            }
+        });
+
+        // Countdown Timer
+        const eventDate = new Date("March 15, 2026 09:00:00").getTime();
+        const timer = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML = "<h2 style='color:var(--marigold); font-family:Bungee;'>The Carnival Has Begun!</h2>";
+                return;
+            }
+
+            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }, 1000);
+
+        // Number Counter Animation
+        const counters = document.querySelectorAll('.bungee[data-target]');
+        const speed = 200;
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const inc = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(animateCounters, 10);
+                } else {
+                    counter.innerText = target + (target > 10 ? '+' : '');
+                }
+            });
+        }
+
+        let animated = false;
+        window.addEventListener('scroll', () => {
+            const statsSection = document.querySelector('.stats-section');
+            if (!animated && window.scrollY > statsSection.offsetTop - window.innerHeight + 200) {
+                animateCounters();
+                animated = true;
+            }
+        });
+
+        // Form Submission
+        document.getElementById('pravahForm').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            const toast = document.getElementById('toastMsg');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+                e.target.reset(); 
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<html>
+<head>
+    <title>Student Portal</title>
+</head>
+<body>
+
+    <h2>Student Portal</h2>
+    
+    <label>Search Name: </label>
+    <input type="text" id="mySearch" onkeyup="searchStudent()">
+    <br><br>
+
+    <div class="student-card" style="border: 2px solid black; padding: 10px; width: 250px; margin-bottom: 10px;">
+        <h3 class="name-tag">Vidhii Yadav</h3>
+        <button onclick="showHide('detail1')">Show/Hide Details</button>
+        
+        <div id="detail1" style="display: none;">
+            <p>Branch: Data Science</p>
+            <p>Year: 1st Year 2nd Sem</p>
+            <p>CGPA: 9.2</p>
+        </div>
+    </div>
+
+    <div class="student-card" style="border: 2px solid black; padding: 10px; width: 250px; margin-bottom: 10px;">
+        <h3 class="name-tag">Teena</h3>
+        <button onclick="showHide('detail2')">Show/Hide Details</button>
+        
+        <div id="detail2" style="display: none;">
+            <p>Branch: CSE</p>
+            <p>Year: 1st Year</p>
+            <p>CGPA: 8.0</p>
+        </div>
+    </div>
+
+    <div class="student-card" style="border: 2px solid black; padding: 10px; width: 250px; margin-bottom: 10px;">
+        <h3 class="name-tag">Yuvraj</h3>
+        <button onclick="showHide('detail3')">Show/Hide Details</button>
+        
+        <div id="detail3" style="display: none;">
+            <p>Branch: CSE</p>
+            <p>Year: 2nd Year</p>
+            <p>CGPA: 7.5</p>
+        </div>
+    </div>
+
+    <script>
+        // Function 1: Details ko dikhane aur chupane ke liye (Beginner level logic)
+        function showHide(boxId) {
+            var box = document.getElementById(boxId);
+            
+            if (box.style.display === "none") {
+                box.style.display = "block"; // Dikhane ke liye
+            } else {
+                box.style.display = "none";  // Wapas chupane ke liye
+            }
+        }
+
+        // Function 2: Search box ke liye simple filter
+        function searchStudent() {
+            var typedWord = document.getElementById("mySearch").value.toLowerCase();
+            
+            var allCards = document.getElementsByClassName("student-card");
+            var allNames = document.getElementsByClassName("name-tag");
+
+            // For loop lagaya har ek card ko check karne ke liye
+            for (var i = 0; i < allCards.length; i++) {
+                var studentName = allNames[i].innerText.toLowerCase();
+                
+                // Agar naam match hota hai toh box dikhao, warna hide kar do
+                if (studentName.includes(typedWord)) {
+                    allCards[i].style.display = "block";
+                } else {
+                    allCards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
