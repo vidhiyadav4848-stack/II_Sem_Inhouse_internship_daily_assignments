@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        /* Using the flexbox concepts you learned and the colors from your registration form */
+        body {
+            background-color: #932d3e; 
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #ff99cc; 
+            text-align: center;
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px; 
+        }
+
+        input, select, button {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #ff66b3; 
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #d11a6a;
+        }
+
+        #result {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c52b4;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator-container">
+        <h2 style="color: #d11a6a; margin-top: 0;">Calculator</h2>
+        
+        <input type="number" id="num1" placeholder="Enter first number">
+        
+        <select id="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        
+        <input type="number" id="num2" placeholder="Enter second number">
+        
+        <button type="button" onclick="performArithmeticOperations()">Calculate</button>
+        
+        <div id="result">Result: </div>
+    </div>
+
+    <script>
+        function performArithmeticOperations() {
+            // Note: JavaScript is case-sensitive, so we use parseFloat and getElementById
+            const number1 = parseFloat(document.getElementById("num1").value);
+            const number2 = parseFloat(document.getElementById("num2").value);
+            const operator = document.getElementById("operator").value;
+            let result = 0;
+
+            // Added a quick check to make sure the user actually typed numbers
+            if (isNaN(number1) || isNaN(number2)) {
+                document.getElementById("result").innerHTML = "Please enter valid numbers";
+                return;
+            }
+
+            switch(operator) {
+                case "+":
+                    result = number1 + number2;
+                    break;
+                case "-":
+                    result = number1 - number2;
+                    break;
+                case "*":
+                    result = number1 * number2;
+                    break;
+                case "/":
+                    if (number2 !== 0) {
+                        result = number1 / number2;
+                    } else {
+                        result = "Division by zero is not possible";
+                    }
+                    break;
+            }
+
+            // Displaying the final result in the div
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = "Result: " + result;
+        }
+    </script>
+</body>
+</html>

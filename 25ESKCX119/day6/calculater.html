@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Calculator</title>
+
+</head>
+
+<body bgcolor="pink">
+
+<center>
+
+<h2>Simple Calculator</h2>
+
+First Number <br>
+<input type="text" id="n1">
+
+<br><br>
+
+Select Operation <br>
+
+<select id="op">
+
+<option>+</option>
+<option>-</option>
+<option>*</option>
+<option>/</option>
+
+</select>
+
+<br><br>
+
+Second Number <br>
+
+<input type="text" id="n2">
+
+<br><br>
+
+<input type="button" value="Calculate" onclick="abc()">
+
+<br><br>
+
+<p id="ans"></p>
+
+</center>
+
+<script>
+
+function abc()
+{
+
+var a;
+var b;
+var c;
+var d;
+
+a=document.getElementById("n1").value;
+b=document.getElementById("n2").value;
+c=document.getElementById("op").value;
+
+if(c=="+")
+{
+d=Number(a)+Number(b);
+}
+
+if(c=="-")
+{
+d=Number(a)-Number(b);
+}
+
+if(c=="*")
+{
+d=Number(a)*Number(b);
+}
+
+if(c=="/")
+{
+d=Number(a)/Number(b);
+}
+
+document.getElementById("ans").innerHTML="Answer = "+d;
+
+}
+
+</script>
+
+</body>
+
+</html>
