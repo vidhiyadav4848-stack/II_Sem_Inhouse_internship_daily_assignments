@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnAI Portal - Dashboard & Modules</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Top Navbar -->
+    <header>
+        <div class="container navbar" style="max-width:100%;">
+            <a href="index.html" class="logo" id="portal-logo">🤖 LearnAI Portal</a>
+            <div class="nav-actions">
+                <span class="notification-bell" onclick="alert('No new unread notifications!')">🔔<span class="notification-badge">1</span></span>
+                <button id="theme-toggle" class="theme-toggle">🌙</button>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <img id="user-avatar" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Student" alt="Profile" style="width:36px; height:36px; border-radius:50%; border:1px solid var(--border);">
+                    <span style="font-weight:600; font-size:14px;" id="user-display-name">Student</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar Menu -->
+        <aside class="sidebar">
+            <ul class="sidebar-menu" id="student-menu">
+                <li class="sidebar-item active" id="nav-dashboard" onclick="switchAppView('dashboard')"><a>📊 Dashboard</a></li>
+                <li class="sidebar-item" id="nav-chatbot" onclick="switchAppView('chatbot')"><a>💬 AI Chatbot</a></li>
+                <li class="sidebar-item" id="nav-modules" onclick="switchAppView('modules')"><a>📚 Course Modules</a></li>
+                <li class="sidebar-item" id="nav-lesson" onclick="switchAppView('lesson')" style="display:none;"><a>📖 Lesson Reader</a></li>
+                <li class="sidebar-item" id="nav-playground" onclick="switchAppView('playground')"><a>🎮 Coding Playground</a></li>
+                <li class="sidebar-item" id="nav-profile" onclick="switchAppView('profile')"><a>👤 Profile & Certs</a></li>
+            </ul>
+
+            <ul class="sidebar-menu" id="admin-menu" style="display:none;">
+                <li class="sidebar-item active" id="nav-admin-overview" onclick="switchAppView('admin-overview')"><a>📊 Admin Overview</a></li>
+                <li class="sidebar-item" id="nav-admin-courses" onclick="switchAppView('admin-courses')"><a>📚 Manage Courses</a></li>
+                <li class="sidebar-item" id="nav-admin-students" onclick="switchAppView('admin-students')"><a>👥 Manage Students</a></li>
+            </ul>
+
+            <div style="margin-top:auto; padding:16px 0 0 0; border-top:1px solid var(--border);">
+                <a href="index.html" onclick="logoutUser()" style="display:flex; align-items:center; gap:12px; color:var(--danger); font-weight:600; padding:12px 16px;">🚪 Log Out</a>
+            </div>
+        </aside>
+
+        <!-- VIEW 1: STUDENT DASHBOARD -->
+        <main class="main-content app-view" id="view-dashboard">
+            <div style="margin-bottom:32px;">
+                <h1 style="font-size:32px; margin-bottom:8px;">Welcome back, <span class="user-name-text">Student</span>! 👋</h1>
+                <p style="color:var(--text-secondary);">Track your study goals, test modules, and interact with the AI assistant.</p>
+            </div>
+            <div class="widget-row">
+                <div class="card widget-small">
+                    <div class="widget-icon">⚡</div>
+                    <div><h4 style="font-size:14px; color:var(--text-secondary);">XP Points</h4><p style="font-size:24px; font-weight:700;" id="stat-xp">150 XP</p></div>
+                </div>
+                <div class="card widget-small">
+                    <div class="widget-icon">🔥</div>
+                    <div><h4 style="font-size:14px; color:var(--text-secondary);">Day Streak</h4><p style="font-size:24px; font-weight:700;" id="stat-streak">3 Days</p></div>
+                </div>
+                <div class="card widget-small">
+                    <div class="widget-icon">🎓</div>
+                    <div><h4 style="font-size:14px; color:var(--text-secondary);">Certificates</h4><p style="font-size:24px; font-weight:700;" id="stat-certs">1</p></div>
+                </div>
+            </div>
+            <div class="dashboard-grid">
+                <div style="display:flex; flex-direction:column; gap:24px;">
+                    <div class="card" style="background: linear-gradient(135deg, rgba(37,99,235,0.05), rgba(124,58,237,0.05)); border-color: rgba(37,99,235,0.2);">
+                        <h3>⭐ Daily Challenge</h3>
+                        <p style="font-size:14px; color:var(--text-secondary); margin: 8px 0 16px;">Complete any MCQ quiz module with 100% correct answers to earn an extra <strong>+100 XP</strong> bonus today!</p>
+                        <button onclick="switchAppView('modules')" class="btn btn-primary">Try a Module Now</button>
+                    </div>
+                    <div class="card">
+                        <h3 style="margin-bottom:16px;">Continue Learning</h3>
+                        <div id="continue-learning-list" style="display:flex; flex-direction:column; gap:16px;"></div>
+                    </div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:24px;">
+                    <div class="card pomodoro-box">
+                        <h3>⏱️ Pomodoro Timer</h3>
+                        <p style="font-size:12px; color:var(--text-secondary); font-weight:600;">⚡ Study Focus</p>
+                        <div id="pomo-timer" class="pomodoro-timer">25:00</div>
+                        <div style="display:flex; justify-content:center; gap:12px;">
+                            <button id="pomo-start" class="btn btn-primary">Start</button>
+                            <button id="pomo-reset" class="btn btn-secondary">Reset</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>📚 Study Planner</h3>
+                        <form id="todo-form" style="display:flex; gap:8px; margin:16px 0;">
+                            <input type="text" id="todo-input" class="form-control" placeholder="Add study task..." required>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </form>
+                        <ul id="todo-list" style="list-style:none; padding:0; display:flex; flex-direction:column; gap:8px;"></ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- VIEW 2: AI CHATBOT -->
+        <main class="main-content app-view" id="view-chatbot" style="display:none;">
+            <div style="display:grid; grid-template-columns: 280px 1fr; gap:24px; height:100%;">
+                <!-- Left Side Chat History -->
+                <div class="card" style="display:flex; flex-direction:column; height:580px; padding:16px; gap:16px;">
+                    <h3>Previous Chats</h3>
+                    <input type="text" id="search-history-input" class="form-control" placeholder="Search conversations..." style="padding: 8px 12px; font-size:13px;">
+                    <div id="search-results-box" style="flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:8px;"></div>
+                </div>
+
+                <!-- Right Main Chat Box -->
+                <div class="card chat-container" style="padding:0; display:flex; flex-direction:column; height:580px;">
+                    <div style="padding:16px 24px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; background-color:var(--surface);">
+                        <div>
+                            <h3 style="font-size:18px;">💬 LearnAI Study Assistant</h3>
+                            <span style="font-size:11px; color:var(--text-secondary);">Ask coding, science, mathematics or english queries.</span>
+                        </div>
+                        <button id="voice-output-btn" class="btn btn-secondary" style="padding: 6px 12px; font-size:12px;">🔈 Output: OFF</button>
+                    </div>
+
+                    <!-- Chat history bubbles -->
+                    <div id="chat-history" class="chat-history-list" style="flex:1; overflow-y:auto; padding:20px; display:flex; flex-direction:column; gap:16px;">
+                        <div class="chat-bubble bot">
+                            Hello! I am your AI study assistant. I can:
+                            <br><br>
+                            * Explain coding concepts in <strong>HTML, CSS, JavaScript, Python, SQL</strong><br>
+                            * Help you debug code or write examples<br>
+                            * Solve mathematics problems or explain english grammar rules<br>
+                            * Assist with career guidance or mini-project ideas
+                            <br><br>
+                            How can I help you today?
+                        </div>
+                    </div>
+
+                    <!-- Input area -->
+                    <form id="chat-form" class="chat-input-bar" style="padding:16px; border-top:1px solid var(--border); display:flex; gap:12px;">
+                        <input type="text" id="chat-input" class="form-control" placeholder="Ask a question (e.g., 'show me html code' or 'math')..." style="flex:1;" required>
+                        <div class="chat-actions" style="display:flex; gap:8px;">
+                            <button type="button" id="voice-input-btn" class="btn btn-secondary" style="padding: 10px 16px;">🎙️ Voice</button>
+                            <button type="submit" class="btn btn-primary" style="padding: 10px 20px;">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- VIEW 3: COURSE MODULES -->
+        <main class="main-content app-view" id="view-modules" style="display:none;">
+            <div style="margin-bottom:32px;">
+                <h1 style="font-size:32px; margin-bottom:8px;">📚 Learning Modules</h1>
+                <p style="color:var(--text-secondary);">Select a module to view complete notes, try out practice code blocks, and pass quizzes.</p>
+            </div>
+            <div id="courses-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap:24px;"></div>
+        </main>
+
+        <!-- VIEW 4: LESSON READER & CODE PRACTICE -->
+        <main class="main-content app-view" id="view-lesson" style="display:none; max-width:900px; margin:0 auto;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
+                <button onclick="switchAppView('modules')" class="btn btn-secondary">← Back to Courses</button>
+                <button onclick="printLessonPDF()" class="btn btn-primary" style="background:#2563EB;">📥 Print / Save PDF</button>
+            </div>
+            <div class="card" id="lesson-printable-area" style="padding:40px; line-height:1.8;">
+                <div style="border-bottom:2px solid var(--primary); padding-bottom:16px; margin-bottom:24px;">
+                    <span style="font-size:12px; font-weight:700; color:var(--primary); text-transform:uppercase;" id="lesson-course-name">Course</span>
+                    <h1 id="lesson-title" style="font-size:32px; margin-top:4px;">Lesson Title</h1>
+                </div>
+                <div id="lesson-content" style="font-size:15px; margin-bottom:32px; white-space:pre-line;"></div>
+                <h3 style="margin-bottom:12px;">💻 Code Practice Template</h3>
+                <pre style="background:#0f172a; color:#f8fafc; padding:20px; border-radius:8px; overflow-x:auto; font-family:monospace; margin-bottom:24px;" id="lesson-code"></pre>
+                <button onclick="switchAppView('playground')" class="btn btn-secondary" style="border-color:var(--accent); color:var(--accent);">⚡ Open in Coding Playground</button>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-top:24px; border-top:1px solid var(--border); padding-top:20px;">
+                <button onclick="markLessonComplete()" id="btn-complete-lesson" class="btn btn-primary">✅ Mark as Completed (+15 XP)</button>
+                <button onclick="startLessonQuiz()" class="btn btn-secondary" style="background:var(--accent); color:white; border:none;">🎯 Take Module Quiz</button>
+            </div>
+        </main>
+
+        <!-- VIEW 5: CODING PLAYGROUND -->
+        <main class="main-content app-view" id="view-playground" style="display:none;">
+            <div style="margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                <div><h1 style="font-size:28px;">🎮 AI Coding Sandbox</h1><p style="color:var(--text-secondary); font-size:13px;">Write HTML, CSS & JS to preview instantly.</p></div>
+                <div style="display:flex; gap:8px;">
+                    <button onclick="runPlayground()" class="btn btn-primary">⚡ Run Output</button>
+                    <button onclick="resetPlayground()" class="btn btn-secondary">↩️ Reset</button>
+                </div>
+            </div>
+            <div class="playground-layout">
+                <div class="editor-pane">
+                    <div class="editor-tabs">
+                        <div class="editor-tab active" onclick="switchEditorTab('html', this)">index.html</div>
+                        <div class="editor-tab" onclick="switchEditorTab('css', this)">style.css</div>
+                        <div class="editor-tab" onclick="switchEditorTab('js', this)">script.js</div>
+                    </div>
+                    <textarea id="pg-html" class="editor-textarea" style="display:block;"><h1>Hello from LearnAI!</h1>&#10;<p>Edit HTML, CSS, and JS tabs and hit Run.</p>&#10;<button id="btn">Click Me!</button></textarea>
+                    <textarea id="pg-css" class="editor-textarea" style="display:none;">body { font-family: sans-serif; padding: 20px; color: #1e293b; }&#10;h1 { color: #2563eb; }&#10;button { padding: 10px 16px; background: #7c3aed; color: white; border: none; border-radius: 6px; cursor: pointer; }</textarea>
+                    <textarea id="pg-js" class="editor-textarea" style="display:none;">document.getElementById('btn').addEventListener('click', () => {&#10;  alert('JavaScript is running perfectly in your Sandbox!');&#10;});</textarea>
+                </div>
+                <div class="preview-pane">
+                    <div class="preview-header">🌐 Live Browser Output Window</div>
+                    <iframe id="pg-preview" class="preview-iframe" sandbox="allow-scripts allow-modals"></iframe>
+                </div>
+            </div>
+        </main>
+
+        <!-- VIEW 6: STUDENT PROFILE & CERTIFICATES -->
+        <main class="main-content app-view" id="view-profile" style="display:none; max-width:900px; margin:0 auto;">
+            <h1 style="font-size:30px; margin-bottom:24px;">👤 Profile & Achievements</h1>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:24px;">
+                <div class="card">
+                    <h3>Modify Details</h3>
+                    <form id="profile-form" style="margin-top:16px;">
+                        <div style="text-align:center; margin-bottom:16px;">
+                            <img id="profile-edit-avatar" src="" style="width:80px; height:80px; border-radius:50%; border:2px solid var(--border); margin-bottom:8px;">
+                            <br><button type="button" onclick="changeAvatarSeed()" class="btn btn-secondary" style="padding:4px 10px; font-size:11px;">🔄 Randomize Avatar</button>
+                        </div>
+                        <div class="form-group" style="margin-bottom:12px;"><label>Full Name</label><input type="text" id="prof-name" class="form-control" required></div>
+                        <div class="form-group" style="margin-bottom:12px;"><label>Email</label><input type="text" id="prof-email" class="form-control" disabled style="background:var(--border);"></div>
+                        <div class="form-group" style="margin-bottom:16px;"><label>Bio</label><textarea id="prof-bio" class="form-control" rows="3"></textarea></div>
+                        <button type="submit" class="btn btn-primary" style="width:100%;">Save Changes</button>
+                    </form>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:20px;">
+                    <div class="card" style="background:linear-gradient(135deg, var(--primary), var(--accent)); color:white;">
+                        <h3>🌟 Level Progress</h3>
+                        <p style="font-size:28px; font-weight:800; margin-top:8px;" id="prof-xp">150 XP</p>
+                        <p style="font-size:13px; opacity:0.9;">Maintained Streak: <strong id="prof-streak">3 Days</strong></p>
+                    </div>
+                    <div class="card">
+                        <h3>🎓 Earned Certificates</h3>
+                        <div id="cert-list" style="margin-top:12px; display:flex; flex-direction:column; gap:12px;"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- VIEW 7: ADMIN PORTAL OVERVIEW -->
+        <main class="main-content app-view" id="view-admin-overview" style="display:none;">
+            <h1 style="font-size:30px; margin-bottom:20px;">📊 Platform Admin Analytics</h1>
+            <div class="widget-row">
+                <div class="card widget-small"><div class="widget-icon">👥</div><div><h4>Students</h4><p style="font-size:24px; font-weight:700;" id="adm-tot-students">4</p></div></div>
+                <div class="card widget-small"><div class="widget-icon">📚</div><div><h4>Courses</h4><p style="font-size:24px; font-weight:700;" id="adm-tot-courses">3</p></div></div>
+                <div class="card widget-small"><div class="widget-icon">💬</div><div><h4>Queries</h4><p style="font-size:24px; font-weight:700;">28</p></div></div>
+            </div>
+            <div class="card" style="margin-top:24px;">
+                <h3>📥 Recent Contact Feedback Logs</h3>
+                <table class="admin-table">
+                    <thead><tr><th>Name</th><th>Email</th><th>Message</th><th>Action</th></tr></thead>
+                    <tbody id="adm-feedback-table"></tbody>
+                </table>
+            </div>
+        </main>
+
+        <!-- VIEW 8: ADMIN COURSE & LESSON CREATOR -->
+        <main class="main-content app-view" id="view-admin-courses" style="display:none;">
+            <h1 style="font-size:30px; margin-bottom:20px;">📚 Course & Lesson Creator</h1>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+                <div class="card">
+                    <h3>➕ Add New Course</h3>
+                    <form id="form-add-course" style="margin-top:16px; display:flex; flex-direction:column; gap:12px;">
+                        <input type="text" id="add-c-name" class="form-control" placeholder="Course Name (e.g. C++ Basics)" required>
+                        <textarea id="add-c-desc" class="form-control" rows="2" placeholder="Synopsis..." required></textarea>
+                        <select id="add-c-cat" class="form-control"><option>Frontend</option><option>Backend</option><option>AI & Data Science</option></select>
+                        <button type="submit" class="btn btn-primary">Create Course</button>
+                    </form>
+                </div>
+                <div class="card">
+                    <h3>📄 Add Lesson to Course</h3>
+                    <form id="form-add-lesson" style="margin-top:16px; display:flex; flex-direction:column; gap:12px;">
+                        <select id="add-l-course" class="form-control"></select>
+                        <input type="text" id="add-l-title" class="form-control" placeholder="Lesson Title" required>
+                        <textarea id="add-l-content" class="form-control" rows="3" placeholder="Lesson Reading Notes..." required></textarea>
+                        <textarea id="add-l-code" class="form-control" rows="2" placeholder="Practice Code Template..."></textarea>
+                        <button type="submit" class="btn btn-primary">Add Lesson</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- VIEW 9: ADMIN STUDENT MANAGEMENT -->
+        <main class="main-content app-view" id="view-admin-students" style="display:none;">
+            <h1 style="font-size:30px; margin-bottom:20px;">👥 Student Management</h1>
+            <table class="admin-table">
+                <thead><tr><th>Name</th><th>Email</th><th>XP</th><th>Streak</th><th>Action</th></tr></thead>
+                <tbody id="adm-students-table"></tbody>
+            </table>
+        </main>
+    </div>
+
+    <!-- CERTIFICATE PRINT MODAL -->
+    <div id="cert-modal" class="modal-overlay" style="display:none;" onclick="this.style.display='none'">
+        <div class="card" style="background:white; border:15px double #2563EB; padding:50px; max-width:700px; width:100%; text-align:center; color:#1e293b;" onclick="event.stopPropagation()">
+            <button onclick="document.getElementById('cert-modal').style.display='none'" style="position:absolute; top:16px; right:16px; border:none; background:none; font-size:20px; cursor:pointer;">❌</button>
+            <h2 style="color:#2563EB; font-weight:800; letter-spacing:2px; text-transform:uppercase;">Certificate of Completion</h2>
+            <p style="font-style:italic; margin:16px 0;">This is proudly presented to</p>
+            <h1 id="cert-print-name" style="font-size:36px; font-family:'Georgia', serif; text-decoration:underline; margin-bottom:16px;">Student Name</h1>
+            <p style="font-size:14px; width:80%; margin:0 auto 20px;">for fulfilling all required study modules and coding practices for the course</p>
+            <h2 id="cert-print-course" style="color:#7C3AED; margin-bottom:30px;">Frontend Development</h2>
+            <div style="display:flex; justify-content:space-between; border-top:1px solid #ccc; padding-top:16px; font-size:12px; color:#64748b;">
+                <div>Date: <strong id="cert-print-date">July 2026</strong></div>
+                <div>Code: <strong id="cert-print-code">CERT-101</strong></div>
+            </div>
+            <button onclick="window.print()" class="btn btn-primary no-print" style="margin-top:24px;">🖨️ Save as PDF / Print</button>
+        </div>
+    </div>
+
+    <!-- QUIZ MODAL -->
+    <div id="quiz-modal" class="modal-overlay" style="display:none;">
+        <div class="card" style="max-width:500px; width:100%; padding:32px;">
+            <h2 id="quiz-q-title" style="margin-bottom:16px;">Question 1</h2>
+            <div id="quiz-options" style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px;"></div>
+            <button onclick="submitQuizAnswer()" class="btn btn-primary" style="width:100%;">Submit Answer</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => { initApp(); });
+    </script>
+</body>
+</html>
