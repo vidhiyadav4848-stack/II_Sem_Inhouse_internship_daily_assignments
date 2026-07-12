@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body><center>
+        <form action="upload.php" method="POST" enctype="multipart/form-data">
+            <label for="txtName" > Name :
+            <input type="text" id="txtName" name="name" required placeholder="Enter Your Name" />
+            </label><br><br>
+            <label for="txtEmail" > Email :
+            <input type="text" id="txtEmail" required name="email" placeholder="Enter Your Email" />
+            </label><br><br>
+            <label for="txtPhone" > Phone Number :
+            <input type="text" id="txtPhone" required name="phone_number" placeholder="Enter Your Phone number  " />
+            </label><br><br>
+            <label> Male
+            <input type="radio" id="check-male" name="gender"  />
+            </label>
+            <label> Female
+            <input type="radio" id="check-female" name="gender"  />
+            </label>
+            <label> prefer not to say
+            <input type="radio" id="check-3" name="gender" />
+            </label><br><br>
+            <label for="dob"> Date
+            <input type="date" id="dob" name="dob" />
+            </label><br><br>
+            <label> Address :
+            <input type="text" name="address" placeholder="Enter Your address " required />
+            </label><br><br>
+            <label> City :
+            <input type="text" name="city" placeholder="Enter Your city" required />
+            </label><br><br>
+            <label> State :
+            <input type="text" name="state" placeholder="Enter Your state" required />
+            </label><br><br>
+            <label> Postal Code :
+            <input type="text" name="pin" placeholder="Enter Your  " required />
+            </label><br><br>
+            <input type="file" name="myfile" accept="image/*" required><br><br>
+            <button type="submit">SUBMIT</button>
+
+        </form></center>
+    </body>
+</html>
